@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment #nombre del deployment
+  namespace: db-frida #nombre del namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+        - name: db #nombre del contenedor
+          image: mysql:latest  #para empujar la img
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: password #password de la base de datos
+            - name: MYSQL_DATABASE
+              value: mydb #nombre de la base de datos
+          ports:
+            - containerPort: 3306  #puerto de la base de datos

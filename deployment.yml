@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment #nombre del deployment
+  namespace: api-frida #nombre del namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: servicios-cloud-frida #nombre del contenedor
+          image: localhost:5000/servicios-cloud-frida:7 #para empujar la img
+          ports:
+            - containerPort: 3000
